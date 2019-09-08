@@ -2,24 +2,54 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0,
+    count: 0
+    // tags: ['tag1', 'tag2', 'tag3']
   };
-  styles = {
-    fontSize:10,
-    fontWeight: "Bold"
+  // styles = { We could Pass classes dynamically in to our element
+  //   fontSize:10,
+  //   fontWeight: "Bold"
+  // };
+  constructor() {
+    super();
+    this.handleIncrement = this.handleIncrement.bind(this);
+  }
+
+  handleIncrement(product) {
+    console.log(product);
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  doHandleIncrement = () => {
+    this.handleIncrement({ id: 1 });
   };
+
   render() {
     return (
       <div>
-        <span style={this.styles} className="badge badge-primary m-2">{this.formatCount()}</span>
-        <button className="btn btn-secondary btn-sm">Increment</button>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.doHandleIncrement}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
+        {/* <ul>
+          {/* We could loop through a list of itmes and render them dynamically on the page 
+          {this.state.tags.map(tag => <li key={tag}>{ tag }</li>)}
+        </ul> */}
       </div>
     );
+  }
+  // WE could extract in separate method with ctrl + shift + r
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.state.count === 0 ? "warning" : "primary";
+    return classes;
   }
 
   formatCount() {
     const { count } = this.state;
-    return count === 0 ? 'Zero' : count;
+    return count === 0 ? "Zero" : count;
   }
 }
 
