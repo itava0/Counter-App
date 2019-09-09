@@ -2,15 +2,15 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0
+    count: this.props.value
     // tags: ['tag1', 'tag2', 'tag3']
   };
   // styles = { We could Pass classes dynamically in to our element
   //   fontSize:10,
   //   fontWeight: "Bold"
   // };
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleIncrement = this.handleIncrement.bind(this);
   }
 
@@ -24,6 +24,7 @@ class Counter extends Component {
   };
 
   render() {
+    console.log("props", this.props);
     return (
       <div>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
